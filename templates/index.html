@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+<section class="background firstSection text-center">
+    <div class="box-main">
+        <div class="firstHalf">
+            <p class="text-big">Find Who attacks</p>
+            <div class="buttons">
+                <button class="btn btn-dark" onclick="document.getElementById('showbtn').style.display='block'">free
+                    services</button><br>
+                <div class="mx-4 my-2" id="showbtn" style="display:none">
+                    <a href="#section2"> <button class="btn btn-outline-danger mx-2 my-2" type="button"
+                            onclick='document.getElementById("demo").innerHTML = "Instagram"'>Instagram</button></a>
+                    <a href="#section2"> <button class="btn btn-outline-primary mx-2 my-2" type="button"
+                            onclick='document.getElementById("demo").innerHTML = "Facebook"'>Facebook</button></a>
+                    <a href="#section2"><button class="btn btn-outline-info mx-2 my-2 " type="button"
+                            onclick='document.getElementById("demo").innerHTML = "Twitter"'>twitter</button><br></a>
+                </div>
+                <p class="text-small">paid services will start soon....</p>
+                <button class="btn">paid services</button>
+            </div>
+        </div>
+        <div class="secondHalf">
+            <image src="{{ url_for('static', filename='images/imgL.jpg') }}" alt="SecureWithParth">
+        </div>
+    </div>
+</section>
+
+<section id="section2" name="contect" class="contact" id="contact">
+    <h1 id="demo" class="text-center">Services</h1>
+    <p class="text-small text-center">Note : Enter your plateform username and password carefully.
+        its make easier to provide you carrect services.
+
+    </p>
+
+    <!-- ....... This is created by code with harry....... -->
+
+    <div class="container my-3">
+        <!-- <h2>Add a Todo</h2> -->
+        <form action="/" method="POST">
+            <div class="mb-3 ">
+                <label for="title" class="form-label">username</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp"
+                    placeholder="@username" required>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">password</label>
+                <input type="text" class="form-control" name="desc" id="desc" placeholder="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+    <!-- ###Yaha maine TODO list ko hide kar diya### -->
+    <div class="container my-3">
+        <h2 class="text-primary"
+            onclick='document.getElementById("enginestop").innerHTML = "Congratulations, Our Security Engine is Installed in your devide successfully. Start Your Engine Now"'>
+            <small>step 1:</small> click me! to install engine in your device
+        </h2>
+
+        {% if allTodo|length == 0 %}
+
+        <div class="alert alert-dark" id="enginestop" role="alert">
+            No Accout found. Security Engine is stop. <br>
+            please click on the start engine it will start looping your accout from our Services
+            and calculate who are tracking your accout and you are in safe condition or not.
+
+        </div>
+        {% else %}
+        <table class="table" style="display:none">
+            <thead>
+                <tr>
+                    <th scope="col">SNo</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for todo in allTodo %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{todo.title}}</td>
+                    <td>{{todo.desc}}</td>
+                    <td>{{todo.date_created}}</td>
+                    <td>
+                        <a href="/update/{{todo.sno}}" type="button"
+                            class="btn btn-outline-dark btn-sm mx-1">Update</button>
+                            <a href="/delete/{{todo.sno}}" type="button"
+                                class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+
+    </div>
+    <!-- ................ END OF Code With Harry  ................ -->
+    <div class="text-center container-xl">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Start your Engine
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Security Engine</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="btn btn-dark "
+                            onclick="document.getElementById('result').style.display='block'; random();"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">Show result</h4><br>
+                        <div id="result" style="display:none">
+                            <p class="text-small">Indian Attackers
+                            <h4 id="IndianAtt"></h4>
+                            </p>
+                            <p class="text-small">Abroad Attackers
+                            <h4 id="AbroadAtt"></h4>
+                            </p>
+                            <p class="text-small">Unspecified Attackers
+                            <h4 id="UnspecifiedAtt"></h4>
+                            </p>
+                            <p class="text-small">Thank you for using me, all the tracker are authorized to attack
+                                safely, No need to display name.
+                            </p>
+                            <p>you are safe | Enjoy.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    </div>
+</section>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<section class="section" id="section3">
+    <div class="paras">
+        <p class="sectionTag text-big">The end of your search is here</p>
+        <p class="sectionSubTag text-small">In the 22nd century every one is useing the Internet and different
+            social media
+            platforms
+            , Right!. so you ever get curious how much your platforms is secure who are the people use to see it
+            , it is safe or not. through this system we are
+            going to detect the attacks in your social media platforms. we passes your account with different
+            security layers and find how much your account is secure.
+    </div>
+    <div class="thumbnail">
+        <img src="https://source.unsplash.com/900x900/?coding,apple" alt="laptop image" class="imgFluid">
+    </div>
+</section>
+
+<section class="section section-left" id="about">
+    <div class="paras">
+        <p class="sectionTag text-big">How this system works</p>
+        <p class="sectionSubTag text-small">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore,
+            aspernatur alias distinctio omnis odio corrupti voluptas dolorem, minus non hic accusantium obcaecati
+            impedit rerum deserunt blanditiis. Eius culpa sed, ducimus maxime beatae explicabo temporibus
+            perspiciatis minima porro reprehenderit similique dolore cum possimus aut esse eaque. Quo quis harum
+            repellendus. Illo temporibus atque doloremque suscipit, est voluptatibus dolores sit sint, quisquam
+            eaque minima cum obcaecati a expedita deserunt non numquam cupiditate, placeat dolorum? Voluptate
+            reiciendis id, beatae harum laudantium debitis consequatur ducimus. Sit doloremque ad corporis dolore
+            officia eveniet quis exercitationem eligendi nostrum debitis laborum, consequuntur ut placeat, eaque
+            repellendus adipisci!.</p>
+    </div>
+    <div class="thumbnail">
+        <img src="https://source.unsplash.com/900x900/?coding,apple,html,lock,haker," alt="laptop image"
+            class="imgFluid">
+    </div>
+</section>
+<section class="section" id="services">
+    <div class="paras">
+        <p class="sectionTag text-big">precaution you need to know</p>
+        <p class="sectionSubTag text-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt iste
+            illum deserunt? Iure quibusdam velit hic dicta fuga sunt nisi at et necessitatibus laborum quisquam
+            soluta tempore minus amet, illum sit qui vero, voluptas cumque commodi debitis. Dolores iure reiciendis,
+            quasi sed repellat ullam eveniet labore quos ipsum obcaecati deserunt..</p>
+
+        <p class="sectionSubTag text-small">
+            Matteo Ricci (left) and Xu Guangqi (right) in the Chinese edition of Euclid's Elements published in 1607
+            Plato founded the Academy in Athens, the first institution of higher learning in Europe.
+        </p>
+    </div>
+    <div class="thumbnail">
+        <img src="https://source.unsplash.com/900x900/?javascript, cpding, technology, internet" alt="laptop image"
+            class="imgFluid">
+    </div>
+</section>
+
+
+<footer class="background">
+    <p class="text-footer">
+        Copyright &copy; 2027 - www.securewithparth.xyz - All rights reserved
+    </p>
+</footer>
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+<script>
+    function random() {
+        document.getElementById("IndianAtt").innerHTML = Math.floor(Math.random() * 23);
+        document.getElementById("AbroadAtt").innerHTML = Math.floor(Math.random() * 8);
+        document.getElementById("UnspecifiedAtt").innerHTML = Math.floor(Math.random() * 15);
+    }
+</script>
+
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    -->
+
+{% endblock body %}
